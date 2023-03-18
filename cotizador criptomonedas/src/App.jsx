@@ -51,7 +51,6 @@ function App() {
           const api = await fetch(url) 
           const response = await api.json()
           setResult(response.DISPLAY[monedaCripto][moneda])
-          console.log(response.DISPLAY[monedaCripto][moneda])
         }
         consultarPrecioMoneda()
       }catch(error) {
