@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react'
 import ImageCripto  from './assets/imagen-criptos.png'
 import Form from './Components/Form'
 import Result from './Components/Result'
+import Spiner from './Components/Spiner'
 
 const Heading=styled.h1`
   color:#fff;
@@ -41,9 +42,12 @@ const ImgCripto=styled.img`
 function App() {
   const [Coins,setCoins]=useState({})
   const [result,setResult]=useState({})
+  const [cargando,setCargando]=useState(false)
 
   useEffect(()=>{
     if(Object.keys(Coins).length>0){
+      setCargando(true)
+      setResult({})
       const {moneda,monedaCripto}=Coins;
       try{
         const consultarPrecioMoneda = async ()=>{
@@ -51,6 +55,7 @@ function App() {
           const api = await fetch(url) 
           const response = await api.json()
           setResult(response.DISPLAY[monedaCripto][moneda])
+          setCargando(false)
         }
         consultarPrecioMoneda()
       }catch(error) {
@@ -70,6 +75,7 @@ function App() {
         <Form
           setCoins={setCoins}
         />
+        {cargando && <Spiner/>}
         {result.PRICE && <Result result={result} />}
       </div>
     </Contenedor>

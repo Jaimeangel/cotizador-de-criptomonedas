@@ -26,7 +26,6 @@ const Imagen=styled.img`
 `
 
 function Result({result}) {
-    console.log(result)
     const {PRICE,HIGHDAY,LOWDAY,CHANGEPCT24HOUR,LASTUPDATE,IMAGEURL}=result;
   return (
     <Contenedor>
